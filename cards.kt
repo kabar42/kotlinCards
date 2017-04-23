@@ -1,7 +1,7 @@
 package org.barnettkent.cardHands
 
-val suits = arrayListOf<String>("H", "C", "D", "S")
-val ranks = arrayListOf<String>("2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "K", "Q", "A")
+val suits = arrayOf("H", "C", "D", "S")
+val ranks = arrayOf("2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "K", "Q", "A")
 
 class Card(r: String, s: String) {
     val rank = r
@@ -18,6 +18,14 @@ class Deck() {
     fun add(card: Card) {
         cards.add(card)
     }
+
+	fun getCards(): ArrayList<Card> {
+		var cardList = ArrayList<Card>()
+		for (c in cards) {
+			cardList.add(c)
+		}
+		return cardList
+	}
 
     override fun toString(): String {
         var stringRep = "["
@@ -40,6 +48,14 @@ class Hand() {
         return cards.size
     }
 
+	fun isFull(): Boolean {
+		var full = false
+        if (size() >= maxHandSize) {
+			full = true
+		}
+		return full
+	}
+
     fun add(card: Card): Boolean {
         if(size() < maxHandSize) {
             cards.add(card)
@@ -48,6 +64,14 @@ class Hand() {
             return false
         }
     }
+
+	fun copy(): Hand {
+		var h = Hand()
+		for (c in cards) {
+			h.add(c)
+		}
+		return h
+	}
 
     override fun toString(): String {
         var stringRep = "["
