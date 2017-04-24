@@ -15,17 +15,25 @@ class Card(r: String, s: String) {
 class Deck() {
     private var cards = ArrayList<Card>()
 
+    fun size(): Int {
+        return cards.size
+    }
+
     fun add(card: Card) {
         cards.add(card)
     }
 
-	fun getCards(): ArrayList<Card> {
-		var cardList = ArrayList<Card>()
-		for (c in cards) {
-			cardList.add(c)
-		}
-		return cardList
-	}
+    fun getCards(): ArrayList<Card> {
+        var cardList = ArrayList<Card>()
+        for (c in cards) {
+            cardList.add(c)
+        }
+        return cardList
+    }
+
+    fun getCard(i: Int): Card {
+        return cards[i]
+    }
 
     override fun toString(): String {
         var stringRep = "["
@@ -48,13 +56,13 @@ class Hand() {
         return cards.size
     }
 
-	fun isFull(): Boolean {
-		var full = false
+    fun isFull(): Boolean {
+        var full = false
         if (size() >= maxHandSize) {
-			full = true
-		}
-		return full
-	}
+            full = true
+        }
+        return full
+    }
 
     fun add(card: Card): Boolean {
         if(size() < maxHandSize) {
@@ -65,13 +73,13 @@ class Hand() {
         }
     }
 
-	fun copy(): Hand {
-		var h = Hand()
-		for (c in cards) {
-			h.add(c)
-		}
-		return h
-	}
+    fun copy(): Hand {
+        var h = Hand()
+        for (c in cards) {
+            h.add(c)
+        }
+        return h
+    }
 
     override fun toString(): String {
         var stringRep = "["

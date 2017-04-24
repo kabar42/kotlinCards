@@ -1,5 +1,7 @@
 package org.barnettkent.cardHands
 
+import kotlin.system.measureTimeMillis
+
 fun main(args: Array<String>) {
     var deck = Deck()
     for (s in suits) {
@@ -9,6 +11,10 @@ fun main(args: Array<String>) {
     }
     println("Deck: $deck")
 
-	var allHands = genAllHands(deck)
-	println("Hands generated: ${allHands.size}")
+    var allHands = ArrayList<Hand>()
+    val genTime = measureTimeMillis {
+        allHands = genAllHands(deck)
+    }
+    println("Hands generated: ${allHands.size}")
+    println("Ran in $genTime ms")
 }
