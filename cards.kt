@@ -1,14 +1,53 @@
 package org.barnettkent.cardHands
 
-val suits = arrayOf("H", "C", "D", "S")
-val ranks = arrayOf("2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "K", "Q", "A")
+val SUIT_COUNT: Int = 4
 
-class Card(r: String, s: String) {
+enum class Suit(val s: Int) {
+    HEARTS(0),
+    CLUBS(1),
+    DIAMONDS(2),
+    SPADES(3);
+
+    companion object {
+        fun from(findValue: Int): Suit = Suit.values().first { it.ordinal == findValue }
+    }
+}
+
+val RANK_COUNT: Int = 13
+
+enum class Rank(val r: Int) {
+    ACE(0),
+    TWO(1),
+    THREE(2),
+    FOUR(3),
+    FIVE(4),
+    SIX(5),
+    SEVEN(6),
+    EIGHT(7),
+    NINE(8),
+    TEN(9),
+    JACK(10),
+    QUEEN(11),
+    KING(12);
+
+    companion object {
+        fun from(findValue: Int): Rank = Rank.values().first { it.ordinal == findValue }
+    }
+}
+
+class Card(r: Rank, s: Suit) {
     val rank = r
     val suit = s
 
     override fun toString(): String {
-        return "$rank$suit"
+        val s = suit.name[0]
+        val rankName = rank.name[0]
+        var r: String = "$rankName"
+
+        if (rank >= Rank.TWO && rank <= Rank.TEN) {
+            r = (rank.ordinal+1).toString()
+        }
+        return "$r$s"
     }
 }
 
@@ -48,8 +87,10 @@ class Deck() {
     }
 }
 
+val HAND_SIZE: Int = 5
+
 class Hand() {
-    private var cards = ArrayList<Card>()
+    var cards = ArrayList<Card>()
     private val maxHandSize = 5
 
     fun size(): Int {
